@@ -1,12 +1,25 @@
-﻿using System;
-
-namespace Demo
+﻿namespace Demo
 {
-    class Program
+    using System;
+    using Domain;
+   /// <summary>
+   /// 
+   /// </summary>
+    internal class Program
     {
-        static void Main(string[] args)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="args"></param>
+        private static void Main()
         {
-            Console.WriteLine("Hello World!");
+            var id1 = new Guid();
+            var book = new Book(id1, "Приключения Буратино");
+
+            var id2 = new Guid();
+            var author = new Author(id2, "Толстой", "Алексей", "Николаевич");
+            Console.WriteLine(book);
+            Console.WriteLine(author);
         }
     }
 }
