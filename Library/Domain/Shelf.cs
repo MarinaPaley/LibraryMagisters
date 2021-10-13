@@ -9,6 +9,11 @@
     /// </summary>
     public class Shelf
     {
+        [Obsolete("For ORM only", true)]
+        protected Shelf()
+        {
+        }
+
         public Shelf(Guid id, string name)
         {
             this.Id = id;
@@ -29,12 +34,12 @@
         /// <summary>
         /// Список книг.
         /// </summary>
-        public ISet<Book> Books { get; protected set; } 
-            = new HashSet<Book>();
+        public ISet<Book> Books { get; protected set; } = new HashSet<Book>();
 
         public override string ToString()
         {
-            return $"{this.Name} {Books.Join(",")}".Trim();
+            var separator = $"{Environment.NewLine}\t";
+            return $"{this.Name}:{separator}{Books.Join(separator)}".Trim();
         }
     }
 }

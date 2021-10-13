@@ -3,17 +3,45 @@
     using System;
     using System.Collections.Generic;
     using Staff.Extensions;
+
     /// <summary>
     /// Книга.
     /// </summary>
     public class Book
     {
-        public Book(Guid id, string title, Shelf shelf)
+        [Obsolete("For ORM only", true)]
+        protected Book()
         {
-            Id = id;
+        }
+
+        public Book(Guid id, string title, params Author[] authors)
+            : this(id, title, new HashSet<Author>(authors))
+        {
+        }
+
+        public Book(Guid id, string title, ISet<Author> authors = null)
+        {
+            this.Id = id;
+
+            this.Title = title.TrimOrNull() ?? throw new ArgumentOutOfRangeException(nameof(title));
+
+            if (authors != null)
+            {
+                foreach (var author in authors)
+                {
+                    this.Authors.Add(author);
+                    author.AddBook(this);
+                }
+            }
+        }
+
+        public void PutToShelf(Shelf shelf)
+        {
+            this.Shelf?.Books.Remove(this);
+
             this.Shelf = shelf ?? throw new ArgumentNullException(nameof(shelf));
-            this.Title = title.TrimOrNull()??
-                throw new ArgumentOutOfRangeException(nameof(title));              
+
+            this.Shelf?.Books.Add(this);
         }
 
         /// <summary>
@@ -26,12 +54,10 @@
         /// </summary>
         public string Title { get; protected set; }
 
-        public ISet<Author> Authors { get; protected set; } 
-                = new HashSet<Author>();
+        public ISet<Author> Authors { get; protected set; } = new HashSet<Author>();
 
         public Shelf Shelf { get; protected set; }
 
-        public override string ToString() =>
-               $"{this.Title} {this.Authors.Join(",")}".Trim();
+        public override string ToString() => $"{this.Authors.Join(", ")} {this.Title}".Trim();
     }
 }

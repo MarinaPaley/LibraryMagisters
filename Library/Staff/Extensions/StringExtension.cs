@@ -2,8 +2,7 @@
 {
     public static class StringExtension
     {
-        public static bool IsNullOrEmpty(this string value) 
-            => string.IsNullOrEmpty(value);
+        public static bool IsNullOrEmpty(this string value) => string.IsNullOrEmpty(value);
 
         public static string TrimOrNull(this string value)
         {

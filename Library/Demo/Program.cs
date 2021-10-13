@@ -2,31 +2,27 @@
 {
     using System;
     using Domain;
+
    /// <summary>
    /// 
    /// </summary>
     internal class Program
     {
         /// <summary>
-        /// 
+        /// Точка входа в программу.
         /// </summary>
-        /// <param name="args"></param>
         private static void Main()
         {
-            var id3 = new Guid();
+            var id3 = Guid.NewGuid();
             var shelf = new Shelf(id3, "Верхняя полка");
 
-            var id1 = new Guid();
-            var book = new Book(id1, "Приключения Буратино", shelf);
-
-            var id2 = new Guid();
+            var id2 = Guid.NewGuid();
             var author = new Author(id2, "Толстой", "Алексей", "Николаевич");
 
-            shelf.Books.Add(book);
+            var id1 = Guid.NewGuid();
+            var book = new Book(id1, "Приключения Буратино", author);
 
-            book.Authors.Add(author);
-            //author.Books.Add(book);
-          
+            book.PutToShelf(shelf);
 
             Console.WriteLine(book);
             Console.WriteLine(author);
