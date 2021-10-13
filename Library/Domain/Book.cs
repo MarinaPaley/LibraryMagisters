@@ -3,7 +3,6 @@
     using System;
     using System.Collections.Generic;
     using Staff.Extensions;
-    using Staff;
     /// <summary>
     /// Книга.
     /// </summary>

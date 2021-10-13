@@ -2,7 +2,6 @@
 {
     using System;
     using System.Collections.Generic;
-    using Staff;
     using Staff.Extensions;
     /// <summary>
     /// Автор.

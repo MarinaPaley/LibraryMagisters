@@ -19,11 +19,16 @@
             var id2 = new Guid();
             var author = new Author(id2, "Толстой", "Алексей", "Николаевич");
 
-            book.Authors.Add(author);
+            var id3 = new Guid();
+            var shelf = new Shelf(id3, "Верхняя полка");
+            shelf.Books.Add(book);
+
+            //book.Authors.Add(author);
             author.Books.Add(book);
 
             Console.WriteLine(book);
             Console.WriteLine(author);
+            Console.WriteLine(shelf);
         }
     }
 }
