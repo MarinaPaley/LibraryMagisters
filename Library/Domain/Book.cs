@@ -8,9 +8,10 @@
     /// </summary>
     public class Book
     {
-        public Book(Guid id, string title)
+        public Book(Guid id, string title, Shelf shelf)
         {
             Id = id;
+            this.Shelf = shelf ?? throw new ArgumentNullException(nameof(shelf));
             this.Title = title.TrimOrNull()??
                 throw new ArgumentOutOfRangeException(nameof(title));              
         }
@@ -27,6 +28,8 @@
 
         public ISet<Author> Authors { get; protected set; } 
                 = new HashSet<Author>();
+
+        public Shelf Shelf { get; protected set; }
 
         public override string ToString() =>
                $"{this.Title} {this.Authors.Join(",")}".Trim();

@@ -10,10 +10,12 @@
         public void Shelf_ToString_Success()
         {
             //arrange
-            var id = new Guid();
-            var book = new Book(id, "Приключения Буратино");
             var id1 = new Guid();
             var shelf = new Shelf(id1, "Полка");
+
+            var id = new Guid();
+            var book = new Book(id, "Приключения Буратино", shelf);
+            
             shelf.Books.Add(book);
 
             //act

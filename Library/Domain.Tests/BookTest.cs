@@ -8,8 +8,10 @@ namespace Domain.Tests
         public void ToString_ValidData_Success()
         {
             //arrange
+            var id1 = new Guid();
+            var shelf = new Shelf(id1, "Полка");
             var id = new Guid();
-            var book = new Book(id, "Приключения Буратино");
+            var book = new Book(id, "Приключения Буратино", shelf);
             var id2 = new Guid();
             var author = new Author(id2, "Толстой", "Алексей", "Николаевич");
             book.Authors.Add(author);
@@ -25,8 +27,10 @@ namespace Domain.Tests
         public void Equals_ValidData_Success()
         {
             //arrange
+            var id1 = new Guid();
+            var shelf = new Shelf(id1, "Полка");
             var id = new Guid();
-            var book = new Book(id, "Приключения Буратино");
+            var book = new Book(id, "Приключения Буратино", shelf);
 
             //act
             var result = book.Equals(book);
