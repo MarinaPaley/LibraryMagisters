@@ -1,6 +1,9 @@
 ﻿namespace Domain
 {
     using System;
+    using System.Collections.Generic;
+    using Staff.Extensions;
+    using Staff;
     /// <summary>
     /// Книга.
     /// </summary>
@@ -9,11 +12,8 @@
         public Book(Guid id, string title)
         {
             Id = id;
-            var trimmed = title?.Trim();
-            if (string.IsNullOrEmpty(trimmed))
-                throw new ArgumentNullException(nameof(title));
-
-            Title = trimmed;                
+            this.Title = title.TrimOrNull()??
+                throw new ArgumentOutOfRangeException(nameof(title));              
         }
 
         /// <summary>
@@ -26,6 +26,10 @@
         /// </summary>
         public string Title { get; protected set; }
 
-        public override string ToString() => this.Title;
+        public ISet<Author> Authors { get; protected set; } 
+                = new HashSet<Author>();
+
+        public override string ToString() =>
+               $"{this.Title} {this.Authors.Join(",")}".Trim();
     }
 }

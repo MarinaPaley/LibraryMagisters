@@ -18,6 +18,10 @@
 
             var id2 = new Guid();
             var author = new Author(id2, "Толстой", "Алексей", "Николаевич");
+
+            book.Authors.Add(author);
+            author.Books.Add(book);
+
             Console.WriteLine(book);
             Console.WriteLine(author);
         }
