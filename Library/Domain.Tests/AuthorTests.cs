@@ -1,34 +1,41 @@
-﻿namespace Domain.Tests
-{
-    using NUnit.Framework;
-    using System;
+﻿// <copyright file="AuthorTests.cs" company="Васильева Марина Алексеевна">
+// Copyright (c) Васильева Марина Алексеевна. All rights reserved.
+// </copyright>
 
+namespace Domain.Tests
+{
+    using System;
+    using NUnit.Framework;
+
+    /// <summary>
+    /// Модульные тесты для класса <see cref="Author"/>.
+    /// </summary>
     [TestFixture]
     public class AuthorTests
     {
         [Test]
         public void ToString_ValidData_Success()
         {
-            //arrange
+            // arrange
             var author = new Author(Guid.NewGuid(), "Толстой", "Алексей", "Николаевич");
 
-            //act
+            // act
             var result = author.ToString();
 
-            //assert
+            // assert
             Assert.AreEqual("Толстой А. Н.", result);
         }
 
         [Test]
         public void Equals_ValidData_Success()
         {
-            //arrange
+            // arrange
             var author = new Author(Guid.NewGuid(), "Толстой", "Алексей", "Николаевич");
 
-            //act
+            // act
             var result = author.Equals(author);
 
-            //assert
+            // assert
             Assert.IsTrue(result);
         }
     }

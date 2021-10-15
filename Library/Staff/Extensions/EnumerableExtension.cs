@@ -1,4 +1,4 @@
-﻿// <copyright file="IEnumerableExtension.cs" company="Васильева Марина Алексеевна">
+﻿// <copyright file="EnumerableExtension.cs" company="Васильева Марина Алексеевна">
 // Copyright (c) Васильева Марина Алексеевна. All rights reserved.
 // </copyright>
 
@@ -7,7 +7,7 @@ namespace Staff.Extensions
     using System.Collections.Generic;
 
     /// <summary>
-    /// 
+    /// Коллекция методов расширения для интерфейса <see cref="IEnumerable{T}"/>.
     /// </summary>
     public static class EnumerableExtension
     {

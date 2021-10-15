@@ -16,16 +16,20 @@ namespace Domain
         /// <summary>
         /// Инициализирует новый экземпляр класса <see cref="Book"/>.
         /// </summary>
-        [Obsolete("For ORM only", true)]
-        protected Book()
-        {
-        }
-
+        /// <param name="id"> Идентификатор. </param>
+        /// <param name="title"> Название. </param>
+        /// <param name="authors"> Коллектив авторов. </param>
         public Book(Guid id, string title, params Author[] authors)
             : this(id, title, new HashSet<Author>(authors))
         {
         }
 
+        /// <summary>
+        /// Инициализирует новый экземпляр класса <see cref="Book"/>.
+        /// </summary>
+        /// <param name="id"> Идентификатор. </param>
+        /// <param name="title"> Название. </param>
+        /// <param name="authors"> Коллектив авторов. </param>
         public Book(Guid id, string title, ISet<Author> authors = null)
         {
             this.Id = id;
@@ -42,13 +46,12 @@ namespace Domain
             }
         }
 
-        public void PutToShelf(Shelf shelf)
+        /// <summary>
+        /// Инициализирует новый экземпляр класса <see cref="Book"/>.
+        /// </summary>
+        [Obsolete("For ORM only", true)]
+        protected Book()
         {
-            this.Shelf?.Books.Remove(this);
-
-            this.Shelf = shelf ?? throw new ArgumentNullException(nameof(shelf));
-
-            this.Shelf?.Books.Add(this);
         }
 
         /// <summary>
@@ -65,6 +68,16 @@ namespace Domain
 
         public Shelf Shelf { get; protected set; }
 
+        public void PutToShelf(Shelf shelf)
+        {
+            this.Shelf?.Books.Remove(this);
+
+            this.Shelf = shelf ?? throw new ArgumentNullException(nameof(shelf));
+
+            this.Shelf?.Books.Add(this);
+        }
+
+        /// <inheritdoc/>
         public override string ToString() => $"{this.Authors.Join(", ")} {this.Title}".Trim();
     }
 }

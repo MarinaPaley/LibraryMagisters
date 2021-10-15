@@ -13,19 +13,18 @@ namespace Domain
     /// </summary>
     public class Shelf
     {
+        public Shelf(Guid id, string name)
+        {
+            this.Id = id;
+            this.Name = name.TrimOrNull() ?? throw new ArgumentOutOfRangeException(nameof(name));
+        }
+
         /// <summary>
         /// Инициализирует новый экземпляр класса <see cref="Shelf"/>.
         /// </summary>
         [Obsolete("For ORM only", true)]
         protected Shelf()
         {
-        }
-
-        public Shelf(Guid id, string name)
-        {
-            this.Id = id;
-            this.Name = name.TrimOrNull() ??
-                throw new ArgumentOutOfRangeException(nameof(name));
         }
 
         /// <summary>
@@ -43,10 +42,11 @@ namespace Domain
         /// </summary>
         public ISet<Book> Books { get; protected set; } = new HashSet<Book>();
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             var separator = $"{Environment.NewLine}\t";
-            return $"{this.Name}:{separator}{Books.Join(separator)}".Trim();
+            return $"{this.Name}:{separator}{this.Books.Join(separator)}".Trim();
         }
     }
 }

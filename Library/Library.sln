@@ -13,7 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Staff", "Staff\Staff.csproj
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_stylecop", "_stylecop", "{F6DF50F0-C2A1-48BE-B658-A1116813B524}"
 	ProjectSection(SolutionItems) = preProject
+		_stylecop\develop.ruleset = _stylecop\develop.ruleset
 		_stylecop\stylecop.json = _stylecop\stylecop.json
+		_stylecop\tests.ruleset = _stylecop\tests.ruleset
 	EndProjectSection
 EndProject
 Global

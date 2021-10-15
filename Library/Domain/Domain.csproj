@@ -5,7 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <AdditionalFiles Include="$(SolutionDir)_stylecop\stylecop.json" Link="stylecop.json"/>
+    <AdditionalFiles Include="$(SolutionDir)_stylecop\stylecop.json" Link="_stylecop\stylecop.json"/>
+    <AdditionalFiles Include="$(SolutionDir)_stylecop\develop.ruleset" Link="_stylecop\develop.ruleset"/>
   </ItemGroup>
 
   <ItemGroup>
