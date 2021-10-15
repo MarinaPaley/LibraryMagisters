@@ -17,20 +17,17 @@ namespace Demo
         /// </summary>
         private static void Main()
         {
-            var id3 = Guid.NewGuid();
-            var shelf = new Shelf(id3, "Верхняя полка");
+            var shelf = new Shelf(Guid.NewGuid(), "Верхняя полка");
 
-            var id2 = Guid.NewGuid();
-            var author = new Author(id2, "Толстой", "Алексей", "Николаевич");
+            var author = new Author(Guid.NewGuid(), "Толстой", "Алексей", "Николаевич");
 
-            var id1 = Guid.NewGuid();
-            var book = new Book(id1, "Приключения Буратино", author);
+            var book = new Book(Guid.NewGuid(), "Приключения Буратино", author);
 
             book.PutToShelf(shelf);
 
-            Console.WriteLine(book);
-            Console.WriteLine(author);
-            Console.WriteLine(shelf);
+            Console.WriteLine($"Книга: {book}");
+            Console.WriteLine($"Автор: {author}");
+            Console.WriteLine($"Полка: {shelf}");
         }
     }
 }
