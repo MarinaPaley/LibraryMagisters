@@ -1,10 +1,14 @@
-﻿namespace Demo
+﻿// <copyright file="Program.cs" company="Васильева Марина Алексеевна">
+// Copyright (c) Васильева Марина Алексеевна. All rights reserved.
+// </copyright>
+
+namespace Demo
 {
     using System;
     using Domain;
 
    /// <summary>
-   /// 
+   /// Точка входа.
    /// </summary>
     internal class Program
     {

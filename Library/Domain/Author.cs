@@ -1,4 +1,8 @@
-﻿namespace Domain
+﻿// <copyright file="Author.cs" company="Васильева Марина Алексеевна">
+// Copyright (c) Васильева Марина Алексеевна. All rights reserved.
+// </copyright>
+
+namespace Domain
 {
     using System;
     using System.Collections.Generic;
@@ -9,29 +13,20 @@
     /// </summary>
     public class Author
     {
-        [Obsolete("For ORM only", true)]
-        protected Author()
-        {
-        }
-
         public Author(Guid id, string familyName, string firstName, string middleName = null)
         {
             this.Id = id;
 
-            this.FamilyName = familyName.TrimOrNull() ??
-               throw new ArgumentOutOfRangeException(nameof(familyName));
+            this.FamilyName = familyName.TrimOrNull() ?? throw new ArgumentOutOfRangeException(nameof(familyName));
 
-            this.FirstName = firstName.TrimOrNull() ??
-                throw new ArgumentOutOfRangeException(nameof(firstName));
+            this.FirstName = firstName.TrimOrNull() ?? throw new ArgumentOutOfRangeException(nameof(firstName));
 
             this.MiddleName = middleName.TrimOrNull();
         }
 
-        public bool AddBook(Book book)
+        [Obsolete("For ORM only", true)]
+        protected Author()
         {
-            return book == null
-                ? throw new ArgumentNullException(nameof(book))
-                : this.Books.Add(book);
         }
 
         /// <summary>
@@ -55,9 +50,16 @@
         public string MiddleName { get; protected set; }
 
         /// <summary>
-        /// Полное Имя.
+        /// Полное имя.
         /// </summary>
-        public string FullName => $"{FamilyName} {FirstName[0]}. {MiddleName?[0]}.".Trim();
+        public string FullName => $"{this.FamilyName} {this.FirstName[0]}. {this.MiddleName?[0]}.".Trim();
+
+        public bool AddBook(Book book)
+        {
+            return book == null
+                ? throw new ArgumentNullException(nameof(book))
+                : this.Books.Add(book);
+        }
 
         public override string ToString() => this.FullName;
 
@@ -65,7 +67,7 @@
 
         public override bool Equals(object obj)
         {
-            return obj is not null && (ReferenceEquals(this, obj) || Equals((Author) obj));
+            return obj is not null && (ReferenceEquals(this, obj) || this.Equals((Author)obj));
         }
 
         public bool Equals(Author other)

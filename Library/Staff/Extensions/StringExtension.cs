@@ -1,4 +1,8 @@
-﻿namespace Staff.Extensions
+﻿// <copyright file="StringExtension.cs" company="Васильева Марина Алексеевна">
+// Copyright (c) Васильева Марина Алексеевна. All rights reserved.
+// </copyright>
+
+namespace Staff.Extensions
 {
     public static class StringExtension
     {
