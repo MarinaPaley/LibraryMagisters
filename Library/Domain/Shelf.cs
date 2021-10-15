@@ -1,4 +1,8 @@
-﻿namespace Domain
+﻿// <copyright file="Shelf.cs" company="Васильева Марина Алексеевна">
+// Copyright (c) Васильева Марина Алексеевна. All rights reserved.
+// </copyright>
+
+namespace Domain
 {
     using System;
     using System.Collections.Generic;
@@ -9,6 +13,9 @@
     /// </summary>
     public class Shelf
     {
+        /// <summary>
+        /// Инициализирует новый экземпляр класса <see cref="Shelf"/>.
+        /// </summary>
         [Obsolete("For ORM only", true)]
         protected Shelf()
         {
