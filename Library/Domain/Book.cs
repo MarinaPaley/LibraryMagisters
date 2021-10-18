@@ -57,18 +57,18 @@ namespace Domain
         /// <summary>
         /// Уникальный идентификатор.
         /// </summary>
-        public Guid Id { get; protected set; }
+        public virtual Guid Id { get; protected set; }
 
         /// <summary>
         /// Название книги.
         /// </summary>
-        public string Title { get; protected set; }
+        public virtual string Title { get; protected set; }
 
-        public ISet<Author> Authors { get; protected set; } = new HashSet<Author>();
+        public virtual ISet<Author> Authors { get; protected set; } = new HashSet<Author>();
 
-        public Shelf Shelf { get; protected set; }
+        public virtual Shelf Shelf { get; protected set; }
 
-        public void PutToShelf(Shelf shelf)
+        public virtual void PutToShelf(Shelf shelf)
         {
             this.Shelf?.Books.Remove(this);
 

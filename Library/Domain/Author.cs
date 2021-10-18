@@ -48,34 +48,34 @@ namespace Domain
         /// <summary>
         /// Уникальный идентификатор.
         /// </summary>
-        public Guid Id { get; protected set; }
+        public virtual Guid Id { get; protected set; }
 
         /// <summary>
         /// Имя.
         /// </summary>
-        public string FirstName { get; protected set; }
+        public virtual string FirstName { get; protected set; }
 
         /// <summary>
         /// Фамилия.
         /// </summary>
-        public string FamilyName { get; protected set; }
+        public virtual string FamilyName { get; protected set; }
 
         /// <summary>
         /// Отчество.
         /// </summary>
-        public string MiddleName { get; protected set; }
+        public virtual string MiddleName { get; protected set; }
 
         /// <summary>
         /// Полное имя.
         /// </summary>
-        public string FullName => $"{this.FamilyName} {this.FirstName[0]}. {this.MiddleName?[0]}.".Trim();
+        public virtual string FullName => $"{this.FamilyName} {this.FirstName[0]}. {this.MiddleName?[0]}.".Trim();
 
         /// <summary>
         /// Книги.
         /// </summary>
-        public ISet<Book> Books { get; protected set; } = new HashSet<Book>();
+        public virtual ISet<Book> Books { get; protected set; } = new HashSet<Book>();
 
-        public bool AddBook(Book book)
+        public virtual bool AddBook(Book book)
         {
             return book == null
                 ? throw new ArgumentNullException(nameof(book))
@@ -92,7 +92,7 @@ namespace Domain
         }
 
         /// <inheritdoc cref="IEquatable{T}"/>
-        public bool Equals(Author other)
+        public virtual bool Equals(Author other)
         {
             return other is not null && (ReferenceEquals(this, other) || this.Id == other.Id);
         }
