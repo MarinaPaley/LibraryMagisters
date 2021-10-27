@@ -16,7 +16,7 @@ namespace Domain.Tests
         public void ToString_ValidData_Success()
         {
             // arrange
-            var author = new Author("Толстой", "Алексей", "Николаевич");
+            var author = GenerateAuthor();
 
             // act
             var result = author.ToString();
@@ -29,7 +29,7 @@ namespace Domain.Tests
         public void Equals_ValidData_Success()
         {
             // arrange
-            var author = new Author("Толстой", "Алексей", "Николаевич");
+            var author = GenerateAuthor();
 
             // act
             var result = author.Equals(author);
@@ -43,7 +43,7 @@ namespace Domain.Tests
         {
             // arrange
             var book = new Book("Приключения Буратино");
-            var author = new Author("Толстой", "Алексей", "Николаевич");
+            var author = GenerateAuthor();
 
             // act
             var actual = author.AddBook(book);
@@ -51,5 +51,7 @@ namespace Domain.Tests
             // assert
             Assert.IsTrue(actual);
         }
+
+        private static Author GenerateAuthor() => new ("Толстой", "Алексей", "Николаевич");
     }
 }

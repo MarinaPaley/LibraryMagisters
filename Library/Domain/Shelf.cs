@@ -33,17 +33,17 @@ namespace Domain
         /// <summary>
         /// Уникальный идентификатор.
         /// </summary>
-        public Guid Id { get; protected set; }
+        public virtual Guid Id { get; protected set; }
 
         /// <summary>
         /// Полка.
         /// </summary>
-        public string Name { get; protected set; }
+        public virtual string Name { get; protected set; }
 
         /// <summary>
         /// Список книг.
         /// </summary>
-        public ISet<Book> Books { get; protected set; } = new HashSet<Book>();
+        public virtual ISet<Book> Books { get; protected set; } = new HashSet<Book>();
 
         /// <inheritdoc/>
         public override string ToString()
