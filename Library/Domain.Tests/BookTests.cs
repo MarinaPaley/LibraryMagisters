@@ -4,7 +4,6 @@
 
 namespace Domain.Tests
 {
-    using System;
     using NUnit.Framework;
 
     /// <summary>
@@ -17,9 +16,9 @@ namespace Domain.Tests
         public void ToString_ValidData_Success()
         {
             // arrange
-            var author = new Author(Guid.NewGuid(), "Толстой", "Алексей", "Николаевич");
+            var author = new Author("Толстой", "Алексей", "Николаевич");
 
-            var book = new Book(Guid.NewGuid(), "Приключения Буратино", author);
+            var book = new Book("Приключения Буратино", author);
 
             // act
             var result = book.ToString();
@@ -32,7 +31,7 @@ namespace Domain.Tests
         public void Equals_ValidData_Success()
         {
             // arrange
-            var book = new Book(Guid.NewGuid(), "Приключения Буратино");
+            var book = new Book("Приключения Буратино");
 
             // act
             var result = book.Equals(book);

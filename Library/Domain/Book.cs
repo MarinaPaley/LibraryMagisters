@@ -16,24 +16,20 @@ namespace Domain
         /// <summary>
         /// Инициализирует новый экземпляр класса <see cref="Book"/>.
         /// </summary>
-        /// <param name="id"> Идентификатор. </param>
         /// <param name="title"> Название. </param>
         /// <param name="authors"> Коллектив авторов. </param>
-        public Book(Guid id, string title, params Author[] authors)
-            : this(id, title, new HashSet<Author>(authors))
+        public Book(string title, params Author[] authors)
+            : this(title, new HashSet<Author>(authors))
         {
         }
 
         /// <summary>
         /// Инициализирует новый экземпляр класса <see cref="Book"/>.
         /// </summary>
-        /// <param name="id"> Идентификатор. </param>
         /// <param name="title"> Название. </param>
         /// <param name="authors"> Коллектив авторов. </param>
-        public Book(Guid id, string title, ISet<Author> authors = null)
+        public Book(string title, ISet<Author> authors = null)
         {
-            this.Id = id;
-
             this.Title = title.TrimOrNull() ?? throw new ArgumentOutOfRangeException(nameof(title));
 
             if (authors != null)
@@ -64,10 +60,21 @@ namespace Domain
         /// </summary>
         public virtual string Title { get; protected set; }
 
+        /// <summary>
+        /// Список авторов данной книги.
+        /// </summary>
         public virtual ISet<Author> Authors { get; protected set; } = new HashSet<Author>();
 
+        /// <summary>
+        /// Полка, на которой стоит книга.
+        /// </summary>
+        // TODO: Должна ли книга знать о полке, на которой она стоит?
         public virtual Shelf Shelf { get; protected set; }
 
+        /// <summary>
+        /// Ставит данную книгу на полку <paramref name="shelf"/>.
+        /// </summary>
+        /// <param name="shelf"> Целевая полка. </param>
         public virtual void PutToShelf(Shelf shelf)
         {
             this.Shelf?.Books.Remove(this);

@@ -5,6 +5,7 @@
 namespace Demo
 {
     using System;
+    using System.Linq;
     using Domain;
     using ORM;
 
@@ -18,13 +19,13 @@ namespace Demo
         /// </summary>
         private static void Main()
         {
-            var shelf = new Shelf(Guid.NewGuid(), "Верхняя полка");
+            var shelf = new Shelf("Верхняя полка");
 
-            var author = new Author(Guid.NewGuid(), "Толстой", "Алексей", "Николаевич");
+            var author = new Author("Толстой", "Алексей", "Николаевич");
 
-            var book1 = new Book(Guid.NewGuid(), "Приключения Буратино", author);
-            var book2 = new Book(Guid.NewGuid(), "Гиперболоид инженера Гарина", author);
-            var book3 = new Book(Guid.NewGuid(), "Аэлита", author);
+            var book1 = new Book("Приключения Буратино", author);
+            var book2 = new Book("Гиперболоид инженера Гарина", author);
+            var book3 = new Book("Аэлита", author);
 
             book1.PutToShelf(shelf);
 
@@ -32,13 +33,26 @@ namespace Demo
 
             using (var session = sessionFactory.OpenSession())
             {
-                // session.Save(book1);
-                //session.Save(book2);
+                session.Save(book1);
+
+                session.Save(book2);
                 session.Save(book3);
+
+                session.Save(author);
+
                 session.Flush();
             }
 
-            Console.WriteLine($"Книга: {book1}");
+            using (var session = sessionFactory.OpenSession())
+            {
+                Console.WriteLine("---------------");
+                Console.WriteLine("Authors: ");
+                Console.WriteLine("---------------");
+                session.Query<Author>().ToList().ForEach(Console.WriteLine);
+                Console.WriteLine("---------------");
+            }
+
+            Console.WriteLine($"Книга: {book2}");
             Console.WriteLine($"Автор: {author}");
             Console.WriteLine($"Полка: {shelf}");
         }

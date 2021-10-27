@@ -17,11 +17,11 @@ namespace Domain.Tests
         public void ToString_ValidData_Success()
         {
             // arrange
-            var shelf = new Shelf(Guid.NewGuid(), "Полка");
+            var shelf = new Shelf("Полка");
 
-            var author = new Author(Guid.NewGuid(), "Толстой", "Алексей", "Николаевич");
+            var author = new Author("Толстой", "Алексей", "Николаевич");
 
-            var book = new Book(Guid.NewGuid(), "Приключения Буратино", author);
+            var book = new Book("Приключения Буратино", author);
 
             book.PutToShelf(shelf);
 

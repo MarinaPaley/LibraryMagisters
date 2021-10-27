@@ -26,10 +26,8 @@ namespace Domain
         ///   - строкой, состоящей только из пробельных символов <br/>
         ///   - или <see langword="null"/>.
         /// </exception>
-        public Author(Guid id, string familyName, string firstName, string middleName = null)
+        public Author(string familyName, string firstName, string middleName = null)
         {
-            this.Id = id;
-
             this.FamilyName = familyName.TrimOrNull() ?? throw new ArgumentOutOfRangeException(nameof(familyName));
 
             this.FirstName = firstName.TrimOrNull() ?? throw new ArgumentOutOfRangeException(nameof(firstName));
@@ -75,6 +73,13 @@ namespace Domain
         /// </summary>
         public virtual ISet<Book> Books { get; protected set; } = new HashSet<Book>();
 
+        /// <summary>
+        /// Добавляет книгу данному автору.
+        /// </summary>
+        /// <param name="book"> Добавляемая автору книга. </param>
+        /// <returns>
+        /// <see langword="true"/> если операция успешно завершена, <see langword="false"/> в противном случае.
+        /// </returns>
         public virtual bool AddBook(Book book)
         {
             return book == null

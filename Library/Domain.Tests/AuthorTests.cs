@@ -4,7 +4,6 @@
 
 namespace Domain.Tests
 {
-    using System;
     using NUnit.Framework;
 
     /// <summary>
@@ -17,7 +16,7 @@ namespace Domain.Tests
         public void ToString_ValidData_Success()
         {
             // arrange
-            var author = new Author(Guid.NewGuid(), "Толстой", "Алексей", "Николаевич");
+            var author = new Author("Толстой", "Алексей", "Николаевич");
 
             // act
             var result = author.ToString();
@@ -30,13 +29,27 @@ namespace Domain.Tests
         public void Equals_ValidData_Success()
         {
             // arrange
-            var author = new Author(Guid.NewGuid(), "Толстой", "Алексей", "Николаевич");
+            var author = new Author("Толстой", "Алексей", "Николаевич");
 
             // act
             var result = author.Equals(author);
 
             // assert
             Assert.IsTrue(result);
+        }
+
+        [Test]
+        public void AddBook_ValidData_Success()
+        {
+            // arrange
+            var book = new Book("Приключения Буратино");
+            var author = new Author("Толстой", "Алексей", "Николаевич");
+
+            // act
+            var actual = author.AddBook(book);
+
+            // assert
+            Assert.IsTrue(actual);
         }
     }
 }

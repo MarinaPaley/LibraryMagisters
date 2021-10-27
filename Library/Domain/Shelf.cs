@@ -13,9 +13,12 @@ namespace Domain
     /// </summary>
     public class Shelf
     {
-        public Shelf(Guid id, string name)
+        /// <summary>
+        /// Инициализирует новый экземпляр класса <see cref="Shelf"/>.
+        /// </summary>
+        /// <param name="name"> Название полки. </param>
+        public Shelf(string name)
         {
-            this.Id = id;
             this.Name = name.TrimOrNull() ?? throw new ArgumentOutOfRangeException(nameof(name));
         }
 
