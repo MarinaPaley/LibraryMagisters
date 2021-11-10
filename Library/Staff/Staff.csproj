@@ -1,7 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
@@ -10,8 +9,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <AdditionalFiles Include="$(SolutionDir)_stylecop\stylecop.json" Link="_stylecop\stylecop.json" />
-    <AdditionalFiles Include="$(SolutionDir)_stylecop\develop.ruleset" Link="_stylecop\develop.ruleset" />
+    <AdditionalFiles Include="$(SolutionDir)_stylecop\stylecop.json" Link="_stylecop\stylecop.json"/>
+    <AdditionalFiles Include="$(SolutionDir)_stylecop\develop.ruleset" Link="_stylecop\develop.ruleset"/>
   </ItemGroup>
 
   <ItemGroup>
@@ -19,11 +18,6 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Domain\Domain.csproj" />
-    <ProjectReference Include="..\ORM\ORM.csproj" />
   </ItemGroup>
 
 </Project>
