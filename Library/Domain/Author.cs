@@ -11,12 +11,11 @@ namespace Domain
     /// <summary>
     /// Автор.
     /// </summary>
-    public class Author
+    public class Author : BaseEntity<Author>
     {
         /// <summary>
         /// Инициализирует новый экземпляр класса <see cref="Author"/>.
         /// </summary>
-        /// <param name="id"> Идентификатор. </param>
         /// <param name="familyName"> Фамилия. </param>
         /// <param name="firstName"> Имя. </param>
         /// <param name="middleName"> Отчество. </param>
@@ -42,11 +41,6 @@ namespace Domain
         protected Author()
         {
         }
-
-        /// <summary>
-        /// Уникальный идентификатор.
-        /// </summary>
-        public virtual Guid Id { get; protected set; }
 
         /// <summary>
         /// Имя.
@@ -89,23 +83,5 @@ namespace Domain
 
         /// <inheritdoc/>
         public override string ToString() => this.FullName;
-
-        /// <inheritdoc/>
-        public override bool Equals(object obj)
-        {
-            return obj is not null && (ReferenceEquals(this, obj) || this.Equals((Author)obj));
-        }
-
-        /// <inheritdoc cref="IEquatable{T}"/>
-        public virtual bool Equals(Author other)
-        {
-            return other is not null && (ReferenceEquals(this, other) || this.Id == other.Id);
-        }
-
-        /// <inheritdoc/>
-        public override int GetHashCode()
-        {
-            return this.Id.GetHashCode();
-        }
     }
 }
