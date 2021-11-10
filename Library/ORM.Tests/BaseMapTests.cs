@@ -10,28 +10,15 @@ namespace ORM.Tests
     /// <summary>
     /// Базовый класс для тестирования маппингов.
     /// </summary>
-    public class BaseMap
+    public class BaseMapTests
     {
-        protected ISessionFactory SessionFactory { get; private set; }
-
         protected ISession Session { get; private set; }
 
-        [OneTimeSetUp]
-        public void SetUpOnce()
-        {
-            this.SessionFactory = NHibernateConfigurator.GetSessionFactory(showSql: true);
-        }
-
-        [OneTimeTearDown]
-        public void Terminate()
-        {
-            this.SessionFactory?.Dispose();
-        }
 
         [SetUp]
         public void SetUp()
         {
-            this.Session = this.SessionFactory.OpenSession();
+            this.Session = NHibernateTestsConfigurator.BuildSessionForTest();
         }
 
         [TearDown]

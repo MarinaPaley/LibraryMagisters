@@ -22,9 +22,11 @@ namespace ORM.Mappings
 
             this.Id(x => x.Id).GeneratedBy.Guid();
 
-            this.Map(x => x.Title);
+            this.Map(x => x.Title).Length(255).Not.Nullable();
 
             this.HasManyToMany(x => x.Authors).Inverse();
+
+            this.References(x => x.Shelf);
         }
     }
 }

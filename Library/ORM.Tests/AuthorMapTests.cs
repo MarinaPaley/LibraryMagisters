@@ -12,7 +12,7 @@ namespace ORM.Tests
     /// Класс, описывающий правила отображения <see cref="Domain.Author"/> на таблицу в БД и наоборот.
     /// </summary>
     [TestFixture]
-    internal class AuthorMapTests : BaseMap
+    internal class AuthorMapTests : BaseMapTests
     {
         [Test]
         public void PersistenceSpecification_ValidData_Success()

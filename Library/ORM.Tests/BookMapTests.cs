@@ -1,4 +1,4 @@
-// <copyright file="ShelfMapTests.cs" company="Васильева Марина Алексеевна">
+﻿// <copyright file="BookMapTests.cs" company="Васильева Марина Алексеевна">
 // Copyright (c) Васильева Марина Алексеевна. All rights reserved.
 // </copyright>
 namespace ORM.Tests
@@ -9,20 +9,20 @@ namespace ORM.Tests
     using ORM.Mappings;
 
     /// <summary>
-    /// Модульные тесты для класса <see cref="ShelfMap"/>.
+    /// Модульные тесты для класса <see cref="BookMap"/>.
     /// </summary>
     [TestFixture]
-    internal class ShelfMapTests : BaseMapTests
+    internal class BookMapTests : BaseMapTests
     {
         [Test]
         public void PersistenceSpecification_ValidData_Success()
         {
             // arrange
-            var shelf = new Shelf("Тестовая полка");
+            var book = new Book("Тестовая книга");
 
             // act & assert
-            new PersistenceSpecification<Shelf>(this.Session)
-                .VerifyTheMappings(shelf);
+            new PersistenceSpecification<Book>(this.Session)
+                .VerifyTheMappings(book);
         }
     }
 }

@@ -1,72 +1,56 @@
 ﻿// <copyright file="NHibernateTestsConfigurator.cs" company="Васильева Марина Алексеевна">
 // Copyright (c) Васильева Марина Алексеевна. All rights reserved.
 // </copyright>
-
-using System;
-using FluentNHibernate.Cfg.Db;
-
 namespace ORM
 {
     using System.Reflection;
     using FluentNHibernate.Cfg;
+    using FluentNHibernate.Cfg.Db;
     using NHibernate;
     using NHibernate.Cfg;
     using NHibernate.Tool.hbm2ddl;
 
     /// <summary>
-    /// 
+    /// Класс для настройки соединения для тестов.
     /// </summary>
-    class NHibernateTestsConfigurator
+    public class NHibernateTestsConfigurator
     {
-        /// <summary>
-        /// 
-        /// </summary>
-        private static FluentConfiguration fluentConfiguration;
-
-        private static Configuration config;
+        private static Configuration configuration;
 
         /// <summary>
-        /// 
+        /// Создание фабрики сессий.
         /// </summary>
-        /// <param name="assembly"></param>
-        /// <param name="showSql"></param>
-        /// <returns></returns>
+        /// <param name="assembly"> Целевая сборка. </param>
+        /// <param name="showSql"> Показывать генерируемый SQL-код. </param>
+        /// <returns> Фабрику сессий. </returns>
         public static ISessionFactory GetSessionFactory(Assembly assembly = null, bool showSql = false)
         {
-            return GetConfiguration(assembly ?? Assembly.GetExecutingAssembly(), showSql).BuildSessionFactory();
+            var databaseConfiguration = SQLiteConfiguration.Standard.InMemory();
+
+            if (showSql)
+            {
+                databaseConfiguration = databaseConfiguration.ShowSql().FormatSql();
+            }
+
+            return Fluently.Configure()
+                .Database(databaseConfiguration)
+                .Mappings(m => m.FluentMappings
+                    .AddFromAssembly(assembly ?? Assembly.GetExecutingAssembly()))
+                .ExposeConfiguration(c => configuration = c)
+                .BuildSessionFactory();
         }
 
         /// <summary>
-        /// 
+        /// Генерируется сессия для модульных тестов.
         /// </summary>
-        /// <param name="assembly"></param>
-        /// <param name="showSql"></param>
-        /// <returns></returns>
-        private static FluentConfiguration GetConfiguration(Assembly assembly, bool showSql = false)
+        /// <param name="showSql"> Показывать генерируемый SQL-код. </param>
+        /// <returns> Сессия подключения к тестовой БД. </returns>
+        public static ISession BuildSessionForTest(bool showSql = true)
         {
-            if (fluentConfiguration is null)
-            {
-                var databaseConfiguration = SQLiteConfiguration.Standard.InMemory();
-
-                if (showSql)
-                {
-                    databaseConfiguration = databaseConfiguration.ShowSql().FormatSql();
-                }
-
-                fluentConfiguration = Fluently.Configure()
-                    .Database(databaseConfiguration)
-                    .Mappings(m => m.FluentMappings.AddFromAssembly(assembly))
-                    .ExposeConfiguration(BuildSchema);
-            }
-
-            return fluentConfiguration;
-        }
-
-        public static void BuildSchema(Configuration configuration)
-        {
-            var session = GetSessionFactory().OpenSession();
+            var session = GetSessionFactory(showSql: showSql).OpenSession();
             new SchemaExport(configuration)
-                .Execute(true, true, false, session.Connection, Console.Out);
+                .Execute(true, true, false, session.Connection, null);
+            return session;
         }
     }
 }
