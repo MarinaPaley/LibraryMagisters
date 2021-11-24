@@ -11,7 +11,7 @@ namespace Domain
     /// <summary>
     /// Книга.
     /// </summary>
-    public class Book
+    public class Book : BaseEntity<Book>
     {
         /// <summary>
         /// Инициализирует новый экземпляр класса <see cref="Book"/>.
@@ -49,11 +49,6 @@ namespace Domain
         protected Book()
         {
         }
-
-        /// <summary>
-        /// Уникальный идентификатор.
-        /// </summary>
-        public virtual Guid Id { get; protected set; }
 
         /// <summary>
         /// Название книги.

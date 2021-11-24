@@ -11,7 +11,7 @@ namespace Domain
     /// <summary>
     /// Полка.
     /// </summary>
-    public class Shelf
+    public class Shelf : BaseEntity<Shelf>
     {
         /// <summary>
         /// Инициализирует новый экземпляр класса <see cref="Shelf"/>.
@@ -29,11 +29,6 @@ namespace Domain
         protected Shelf()
         {
         }
-
-        /// <summary>
-        /// Уникальный идентификатор.
-        /// </summary>
-        public virtual Guid Id { get; protected set; }
 
         /// <summary>
         /// Полка.
