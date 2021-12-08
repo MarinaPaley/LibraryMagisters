@@ -1,14 +1,14 @@
 ﻿// <copyright file="BookRepository.cs" company="Васильева Марина Алексеевна">
 // Copyright (c) Васильева Марина Алексеевна. All rights reserved.
 // </copyright>
-using Domain;
-using NHibernate;
-using System;
-using System.Linq;
-using System.Linq.Expressions;
-
 namespace ORM.Repositories
 {
+    using System;
+    using System.Linq;
+    using System.Linq.Expressions;
+    using Domain;
+    using NHibernate;
+
     /// <summary>
     /// Репозиторий для Книги.
     /// </summary>
@@ -16,7 +16,12 @@ namespace ORM.Repositories
     {
         private ISession session;
 
-        public BookRepository(ISession session) 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="session"></param>
+        /// <exception cref="ArgumentNullException"></exception>
+        public BookRepository(ISession session)
         {
             this.session = session
                 ?? throw new ArgumentNullException(nameof(session));
@@ -35,15 +40,40 @@ namespace ORM.Repositories
             return this.GetAll().FirstOrDefault(predicate);
         }
 
-        public Book Get(int id)
+        public Book Get(Guid id)
         {
-            return this.session.Get<Book>(id);
+            return this.session?.Get<Book>(id);
         }
 
         /// <inheritdoc/>
         public IQueryable<Book> GetAll()
         {
-            return this.session.Query<Book>();
+            return this.session?.Query<Book>();
+        }
+
+        /// <inheritdoc/>
+        public bool Save(Book entity)
+        {
+            try
+            {
+                this.session?.Save(entity);
+                this.session.Flush();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public Book GetByTitle(string title)
+        {
+            return this.GetAll().FirstOrDefault<Book>(x => x.Title == title);
+        }
+
+        public IQueryable<Book> FindBooksStartNameWith(string str)
+        {
+            return this.GetAll().Where(x => x.Title.StartsWith(str));
         }
     }
 }

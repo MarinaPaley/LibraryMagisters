@@ -18,7 +18,7 @@ namespace ORM.Repositories
         /// </summary>
         /// <param name="id"> Идентификатор. </param>
         /// <returns> Сущность. </returns>
-        TEntity Get(int id);
+        TEntity Get(Guid id);
 
         /// <summary>
         /// Получает (находит) сущность по выражению.
@@ -39,5 +39,12 @@ namespace ORM.Repositories
         /// <param name="predicate"> Выражение запроса. </param>
         /// <returns> Данные. </returns>
         IQueryable<TEntity> Filter(Expression<Func<TEntity, bool>> predicate);
+
+        /// <summary>
+        /// Сохраняет сущность в БД.
+        /// </summary>
+        /// <param name="entity"> Сущность.</param>
+        /// <returns> Возвращает <see cref="true"/> в случае успеха. </returns>
+        bool Save(TEntity entity);
     }
 }

@@ -24,7 +24,10 @@ namespace ORM.Mappings
 
             this.Map(x => x.Name).Length(255).Not.Nullable();
 
-            this.HasMany(x => x.Books);
+            this.HasMany(x => x.Books)
+                .Cascade
+                .Delete()
+                .Not.Inverse();
         }
     }
 }
