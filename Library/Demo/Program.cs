@@ -8,10 +8,11 @@ namespace Demo
     using System.Linq;
     using Domain;
     using ORM;
+using ORM.Repositories;
 
-    /// <summary>
-    /// Точка входа.
-    /// </summary>
+/// <summary>
+/// Точка входа.
+/// </summary>
     internal class Program
     {
         /// <summary>
@@ -31,30 +32,50 @@ namespace Demo
 
             var sessionFactory = NHibernateConfigurator.GetSessionFactory(showSql: true);
 
-            using (var session = sessionFactory.OpenSession())
-            {
-                session.Save(book1);
+            var session = sessionFactory.OpenSession();
 
-                session.Save(book2);
-                session.Save(book3);
+            var bookRepo = new BookRepository(session);
 
-                session.Save(author);
+            bookRepo.Save(book1);
+            bookRepo.Save(book2);
+            bookRepo.Save(book3);
 
-                session.Flush();
-            }
+            var authorRepo = new AuthorRepository(session);
 
-            using (var session = sessionFactory.OpenSession())
-            {
-                Console.WriteLine("---------------");
-                Console.WriteLine("Authors: ");
-                Console.WriteLine("---------------");
-                session.Query<Author>().ToList().ForEach(Console.WriteLine);
-                Console.WriteLine("---------------");
-            }
+            authorRepo.Save(author);
 
-            Console.WriteLine($"Книга: {book2}");
-            Console.WriteLine($"Автор: {author}");
-            Console.WriteLine($"Полка: {shelf}");
+            var shelfRepo = new ShelfRepository(session);
+            shelfRepo.Save(shelf);
+
+            //session.Flush();
+
+            Console.WriteLine(bookRepo.GetByTitle("Аэлита"));
+            bookRepo.FindBooksStartNameWith("П").ToList().ForEach(Console.WriteLine);
+
+            //using (var session = sessionFactory.OpenSession())
+            //{
+            //    session.Save(book1);
+
+            //    session.Save(book2);
+            //    session.Save(book3);
+
+            //    session.Save(author);
+
+            //    session.Flush();
+            //}
+
+            //using (var session = sessionFactory.OpenSession())
+            //{
+            //    Console.WriteLine("---------------");
+            //    Console.WriteLine("Authors: ");
+            //    Console.WriteLine("---------------");
+            //    session.Query<Author>().ToList().ForEach(Console.WriteLine);
+            //    Console.WriteLine("---------------");
+            //}
+
+            //Console.WriteLine($"Книга: {book2}");
+            //Console.WriteLine($"Автор: {author}");
+            //Console.WriteLine($"Полка: {shelf}");
         }
     }
 }

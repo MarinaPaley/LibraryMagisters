@@ -24,7 +24,10 @@ namespace ORM.Mappings
 
             this.Map(x => x.Title).Length(255).Not.Nullable();
 
-            this.HasManyToMany(x => x.Authors).Inverse();
+            this.HasManyToMany(x => x.Authors)
+                .Cascade
+                .Delete()
+                .Inverse();
 
             this.References(x => x.Shelf);
         }

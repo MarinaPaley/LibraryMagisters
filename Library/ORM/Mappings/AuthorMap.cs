@@ -26,7 +26,9 @@ namespace ORM.Mappings
                 this.Map(x => x.FirstName).Length(255).Not.Nullable();
                 this.Map(x => x.MiddleName).Length(255);
 
-                this.HasManyToMany(x => x.Books);
+                this.HasManyToMany(x => x.Books)
+                .Cascade
+                .Delete();
         }
     }
 }
